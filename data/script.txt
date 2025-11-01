@@ -1,0 +1,138 @@
+[intern]
+
+
+[extern]
+
+;===========================================================================
+;=                      Entry Syntax                                       =
+;===========================================================================
+;
+; Begin
+;	TargetFile	filename without path the entry gets written to
+;	SourceFile	filename without path the entry has as source data
+;	TargetPath	the path of the target (can use variables, see below)
+;	Disk		the number of the disk this entry or the first segment of this entry is located on, default = 1
+;	LeaveOnMinimum	when this is 1, the file does not get installed when the use choose a minumum install, default = 0
+;	SkipIfNotFound  when this is 1, the file gets skipped if it cannot be found. Default behavior will show an error when files cannot be found. default = 0
+;	NumSegments	when this is >0, the entry consists of multiple segments of the same name on different disks, default = 0
+;	InstallType	the type of entry:
+;				copy		the file gets copied from source to target
+;				decompress	the file gets decompressed from source to target
+;	
+; End
+;
+; Variables:
+;
+;	%install_path%	the path the user choose to install the game to
+;
+
+;==================================================================================================
+;=		DISK 1 CONTENT
+;==================================================================================================
+
+Begin
+	TargetFile	= bigfile.000
+	SourceFile	= bigfile.000
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= bigfile.001
+	SourceFile	= bigfile.001
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= bigfile.002
+	SourceFile	= bigfile.002
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= tra.exe
+	SourceFile	= traegm.exe
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= uninsttra.exe
+	SourceFile	= uninsttra.exe
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= readme.rtf
+	SourceFile	= readme.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= LisezMoi.rtf
+	SourceFile	= LisezMoi.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= Leggimi.rtf
+	SourceFile	= Leggimi.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= Readme-Datei.rtf
+	SourceFile	= Readme-Datei.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= Léeme.rtf
+	SourceFile	= Léeme.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+;
+; Debug executables. If not present, skip.
+;
+
+Begin
+	TargetFile	= trae.exe
+	SourceFile	= trae.exe
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= trae.pdb
+	SourceFile	= trae.pdb
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
