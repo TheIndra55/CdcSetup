@@ -30,41 +30,69 @@
 ;=		DISK 1 CONTENT
 ;==================================================================================================
 
-Begin
-	TargetFile	= bigfile.000
-	SourceFile	= bigfile.000
-	InstallType	= copy
-	TargetPath	= %install_path%\
-	Disk		= 1
-End
+; Archive starts on disk 2, wraps until we end on disk 1.
 
 Begin
-	TargetFile	= bigfile.001
-	SourceFile	= bigfile.001
-	InstallType	= copy
+	SourceFile	= archive.dat
+	InstallType	= decompress
 	TargetPath	= %install_path%\
-	Disk		= 1
+	Disk		= 2
 End
 
-Begin
-	TargetFile	= bigfile.002
-	SourceFile	= bigfile.002
-	InstallType	= copy
-	TargetPath	= %install_path%\
-	Disk		= 1
-End
+; Now on disk 1 again.
 
 Begin
 	TargetFile	= tra.exe
-	SourceFile	= traegm.exe
+	SourceFile	= tra.dat
 	InstallType	= copy
 	TargetPath	= %install_path%\
 	Disk		= 1
 End
 
 Begin
-	TargetFile	= uninsttra.exe
-	SourceFile	= uninsttra.exe
+	TargetFile	= nvidia.bik
+	SourceFile	= nvidia.bik
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= intro.bik
+	SourceFile	= intro.bik
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= intro_w.bik
+	SourceFile	= intro_w.bik
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= binkw32.dll
+	SourceFile	= binkw32.dll
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= tra.mcl
+	SourceFile	= tra.mcl
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
+Begin
+	TargetFile	= TraMCE.png
+	SourceFile	= TraMCE.png
 	InstallType	= copy
 	TargetPath	= %install_path%\
 	Disk		= 1
@@ -115,6 +143,49 @@ Begin
 	SkipIfNotFound	= 1
 End
 
+Begin
+	TargetFile	= Readme-Datei.rtf
+	SourceFile	= Readme-Datei.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= readme_polish.rtf
+	SourceFile	= readme_polish.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= readme_russian.rtf
+	SourceFile	= readme_russian.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= readme_czech.rtf
+	SourceFile	= readme_czech.rtf
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+Begin
+	TargetFile	= uninsttra.exe
+	SourceFile	= uninsttra.dat
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+End
+
 ;
 ; Debug executables. If not present, skip.
 ;
@@ -131,6 +202,15 @@ End
 Begin
 	TargetFile	= trae.pdb
 	SourceFile	= trae.pdb
+	InstallType	= copy
+	TargetPath	= %install_path%\
+	Disk		= 1
+	SkipIfNotFound	= 1
+End
+
+Begin
+	TargetFile	= dbghelp.dll
+	SourceFile	= dbghelp.dll
 	InstallType	= copy
 	TargetPath	= %install_path%\
 	Disk		= 1

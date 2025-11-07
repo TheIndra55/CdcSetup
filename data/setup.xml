@@ -4,8 +4,8 @@
          CompanyName="Eidos Inc."
          LegalCopyright="Copyright (C) 2008 Eidos Inc."
          LegalTrademarks="Crystal Dynamics(R), the Crystal Dynamics(R) logo and the Eidos(R) logo are registered trademarks of the Eidos Group of Companies"
-         ProductName="Tomb Raider: Underworld Demo"
-         ProductVersion="1.0"/>
+         ProductName="Tomb Raider: Underworld"
+         ProductVersion="1.1"/>
 
 	<Autorun Image="autorun.bmp" Mutex="TRUAUTOMTX">
 		<Button Caption="%local:localID_AUTORUN_PLAY%" Task="%var:install_path%\tru.exe" RequireInstalled="true" Exit="true"/>
@@ -13,6 +13,7 @@
 		<Button Caption="%local:localID_AUTORUN_INSTALL%" Task="setup.exe -language=%var:langid%" RequireNotInstalled="true" Exit="true"/>
 		<Button Caption="%local:localID_AUTORUN_README%" Task="%local:localID_ReadmeFileName%"/>
 		<Button Caption="%local:localID_AUTORUN_EXIT%" Exit="true"/>
+		<Button Caption="%local:localID_OtherMedia%" Task="gameshadowtruv250.exe"/>
 	</Autorun>
 
 	<Setup
@@ -21,9 +22,9 @@
 		PathBitmap="pathimage.bmp"
 		InstallEndBitmap="doneimage.bmp"
 		Mutex="TRUSETUPMTX">
-		<!--BackgroundImages>
+		<BackgroundImages>
 			<BackgroundImage Name="start_16_9.jpg"/>
-		</BackgroundImages-->
+		</BackgroundImages>
 	</Setup>
 
 	<InstallTypes Default="Full">
@@ -32,21 +33,26 @@
 	</InstallTypes>
 
 	<Install	
-		InstallFolder="\Eidos\Tomb Raider - Underworld Demo"
-		StartMenuFolder="\Eidos\Tomb Raider - Underworld Demo"
-		SaveGameFolder="\Eidos\Tomb Raider - Underworld Demo"
-		DesktopShortcutName="Tomb Raider - Underworld Demo"
+		InstallFolder="\Eidos\Tomb Raider - Underworld"
+		StartMenuFolder="\Eidos\Tomb Raider - Underworld"
+		SaveGameFolder="\Eidos\Tomb Raider - Underworld"
+		DesktopShortcutName="Tomb Raider - Underworld"
 		CompanyRegkey="Crystal Dynamics"
-		ProductRegkey="Tomb Raider: Underworld Demo"
+		ProductRegkey="Tomb Raider: Underworld"
 		MinPlatformVersion="Win2000"
 		GameExeName="TRU.exe"
 		GameMutex="TRUMUTEX"
 		UninstallExe="uninst.exe"
-		NumDisks="1">
+		DXInstall="dx\dxsetup.exe /silent"
+		NumDisks="2">
 
 		<Files>
-			<File Source="bigfile.000" Disk="1" Size="2045"/>
-						  
+			<File Source="bigfile.000" Disk="2" Size="2045"/>
+			<File Source="bigfile.001" Disk="2" Size="2045"/>
+			<File Source="patch.000" Disk="2" Size="20"/>
+			<File Source="bigfile.002" Disk="1" SkipIfNotFound="true"/>
+			<File Source="bigfile.003" Disk="1" SkipIfNotFound="true"/>
+
 			<File Target="%var:install_path%\binkw32.dll"			Source="binkw32.dll"        Disk="1"/>
 
 			<!-- Actually, the game uses only one of these two. But it changes quite often. Perhaps remove the SkipIfNotFound when it stabilizes. -->
@@ -83,21 +89,34 @@
 			<File Source="Movies\ninjas.bik" SkipIfNotFound="true"/>
 		</Files>
 
+		<FileTypes>
+			<FileType
+				Extension=".TRUSave"
+				Description="%local:localID_SaveGameFriendlyName%"
+				RegkeyName="TRUSaveGameType"
+				OpenCommand="%var:install_path%\tru.exe"
+				OpenArguments="-savegame=%1"
+				IconFile="%var:install_path%\tru.exe"
+				IconID="102"
+				RichGameHeader="true"
+			/>
+		</FileTypes>
+
 		<Platform MaxVersion="5.2">
 			<Shortcuts>
 				<Shortcut 
-					Description="Tomb Raider: Underworld Demo"
-					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo"
-					LinkFile="Tomb Raider - Underworld Demo.lnk"
+					Description="Tomb Raider: Underworld"
+					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld"
+					LinkFile="Tomb Raider - Underworld.lnk"
 					TargetPath="%var:install_path%"
 					TargetFile="tru.exe"
 					Arguments=""
 					WorkingDir="%var:install_path%"
 				/>
 				<Shortcut 
-					Description="Tomb Raider: Underworld Demo (Release)"
-					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo"
-					LinkFile="Tomb Raider - Underworld Demo (Release).lnk"
+					Description="Tomb Raider: Underworld (Release)"
+					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld"
+					LinkFile="Tomb Raider - Underworld (Release).lnk"
 					TargetPath="%var:install_path%"
 					TargetFile="tr8_win32_release.exe"
 					Arguments="-MainMenu=true -archive -norootchange -srconfig=PC-W"
@@ -105,9 +124,9 @@
 					SkipIfNotFound="true"
 				/>
 				<Shortcut 
-					Description="Tomb Raider: Underworld Demo (Final)"
-					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo"
-					LinkFile="Tomb Raider - Underworld Demo (Final).lnk"
+					Description="Tomb Raider: Underworld (Final)"
+					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld"
+					LinkFile="Tomb Raider - Underworld (Final).lnk"
 					TargetPath="%var:install_path%"
 					TargetFile="tr8_win32_final.exe"
 					Arguments=""
@@ -116,7 +135,7 @@
 				/>
 
 				<Shortcut 
-					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo"
+					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld"
 					LinkFile="%local:localID_PROGRAMS_SETUP%.lnk"
 					TargetPath="%var:install_path%"
 					TargetFile="tru.exe"
@@ -124,7 +143,7 @@
 					WorkingDir="%var:install_path%"
 				/>
 				<Shortcut 
-					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo"
+					LinkPath="%var:programs_path%\Eidos\Tomb Raider - Underworld"
 					LinkFile="%local:localID_PROGRAMS_README%.lnk"
 					TargetPath="%var:install_path%"
 					TargetFile="%local:localID_ReadmeFileName%"
@@ -133,29 +152,39 @@
 
 			<InternetShortcuts>
 				<InternetShortcut 
-					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo\%local:localID_PROGRAMS_WEBSITES%"
+					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld\%local:localID_PROGRAMS_WEBSITES%"
 					Name="Eidos"
 					URL="http://www.eidos.com"/>
 				<InternetShortcut 
-					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo\%local:localID_PROGRAMS_WEBSITES%"
+					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld\%local:localID_PROGRAMS_WEBSITES%"
 					Name="Nixxes"
 					URL="http://www.nixxes.com/"/>
 				<InternetShortcut 
-					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld Demo\%local:localID_PROGRAMS_WEBSITES%"
-					Name="Tomb Raider - Underworld Demo"
+					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld\%local:localID_PROGRAMS_WEBSITES%"
+					Name="Registration"
+					URL="http://www.eidosregistration.com"/>
+				<InternetShortcut 
+					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld\%local:localID_PROGRAMS_WEBSITES%"
+					Name="Support"
+					URL="http://www.eidos.com/support.html"/>
+				<InternetShortcut 
+					Path="%var:programs_path%\Eidos\Tomb Raider - Underworld\%local:localID_PROGRAMS_WEBSITES%"
+					Name="Tomb Raider - Underworld"
 					URL="http://www.tombraider.com/"/>
 			</InternetShortcuts>
 		</Platform>
 
 		<GameExplorerTasks>
-			<Play Name="Tomb Raider - Underworld Demo"			Path="%var:install_path%\tru.exe" Arguments="" Scope="AllUsers"/>
-			<Play Name="Tomb Raider - Underworld Demo (Release)"		Path="%var:install_path%\tr8_win32_release.exe" Arguments="-MainMenu=true -archive -norootchange -srconfig=PC-W" Scope="AllUsers" SkipIfNotFound="true"/>
-			<Play Name="Tomb Raider - Underworld Demo (Final)"		Path="%var:install_path%\tr8_win32_final.exe" Arguments="" Scope="AllUsers" SkipIfNotFound="true"/>
+			<Play Name="Tomb Raider - Underworld"			Path="%var:install_path%\tru.exe" Arguments="" Scope="AllUsers"/>
+			<Play Name="Tomb Raider - Underworld (Release)"		Path="%var:install_path%\tr8_win32_release.exe" Arguments="-MainMenu=true -archive -norootchange -srconfig=PC-W" Scope="AllUsers" SkipIfNotFound="true"/>
+			<Play Name="Tomb Raider - Underworld (Final)"		Path="%var:install_path%\tr8_win32_final.exe" Arguments="" Scope="AllUsers" SkipIfNotFound="true"/>
 
 			<Play Name="%local:localID_PROGRAMS_SETUP%"		Path="%var:install_path%\tru.exe" Arguments="-setup"	Scope="AllUsers"/>
 			<Play Name="%local:localID_PROGRAMS_README%"	Path="%var:install_path%\%local:localID_ReadmeFileName%" Arguments=""	Scope="AllUsers"/>
 
-			<Support Name="Tomb Raider - Underworld Demo"			URL="http://www.tombraider.com/"		Scope="AllUsers"/>
+			<Support Name="Tomb Raider - Underworld"			URL="http://www.tombraider.com/"		Scope="AllUsers"/>
+			<Support Name="%local:localID_PROGRAMS_SUPPORT%"	URL="http://www.eidos.com/support.html"	Scope="AllUsers"/>
+			<Support Name="%local:localID_GAME_REGISTRATION%"	URL="http://www.eidosregistration.com/"	Scope="AllUsers"/>
 		</GameExplorerTasks>
 
 		<MediaCenter>
@@ -169,13 +198,13 @@
 				TargetFile="tru.exe"
 				Arguments="-relaunchmce"
 			/>
-			<MediaCenterLink name="Tomb Raider - Underworld Demo" TargetPath="%var:install_path%" TargetFile="tru.mcl">
+			<MediaCenterLink name="Tomb Raider - Underworld" TargetPath="%var:install_path%" TargetFile="tru.mcl">
 				<application
-					Title="Tomb Raider: Underworld Demo"
+					Title="Tomb Raider: Underworld"
 					ID=""
 					Run=".\tru.lnk" 
 					BGColor="RGB(0,0,0)" 
-					Name="Tomb Raider: Underworld Demo"
+					Name="Tomb Raider: Underworld"
 					CompanyName="Eidos"
 					StartImage="TruMCE.png"
 					ThumbnailImage="TruMCE.png"
